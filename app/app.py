@@ -3,6 +3,7 @@ from .model import db
 from .controller.auth_controller import auth_bluprint
 
 app = Flask(__name__)
+app.secret_key = "secret_key"
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://root:root@localhost:5432/postgres"
 
 db.init_app(app)
@@ -15,6 +16,11 @@ app.register_blueprint(auth_bluprint, url_prefix="/auth")
 @app.route("/")
 def index():
     return render_template("home.html")
+
+
+@app.route("/app")
+def app_page():
+    return render_template("app.html")
 
 
 if __name__ == "__main__":
